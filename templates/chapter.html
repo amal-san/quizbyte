@@ -1,0 +1,14 @@
+{% for subject in chapters %}
+
+{% for chapter in subject.subject_chapters.all %}
+
+
+
+	{{ chapter.chapter_name }}
+	<a href="{% url "chapter_detail" chapter.pk %}">Link</a><br>
+
+
+
+{% endfor %}
+
+{% endfor %}
