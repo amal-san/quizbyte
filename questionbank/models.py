@@ -14,6 +14,10 @@ class Question(models.Model):
 	def __str__(self):
 		return str(self.question_number)
 
+	def get_absolute_url(self):
+		return reverse('question_detail', args=[str(self.pk)])
+
+
 
 class Chapter(models.Model):
 	chatper_number = models.IntegerField(_("Chapter's Number"),unique=True)
