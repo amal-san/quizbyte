@@ -1,0 +1,17 @@
+{% for subject in questions %}
+
+{% for question in subject.chapter_questions.all %}
+
+
+
+	{{ question }} {{question.pk}}	<a href="{% url 'question_detail' question.pk %}">Explore</a>
+
+
+
+
+
+
+
+{% endfor %}
+
+{% endfor %}
