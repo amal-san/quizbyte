@@ -1,126 +1,62 @@
-<head>
-<title>QuizByte</title>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-</head>
-
-<style type="text/css">
-	@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
-	body {
-		margin:0;
-		font-family: 'Playfair Display', serif;
-		overflow:none;
-
-		}
-	h2 {
-		margin-bottom:0px;
-	}
-	.card {
-		border:black;
-		text-align: center;
-		margin:.5em;
-		flex:1;
-		margin-top: 1em;
-		display:flex;
-		flex-direction: column;
-		border-radius: 6px;
-		height: auto;
-		opacity: 0.8;
-		box-shadow: 2px 4px 4px 0px #404040;
-*/	}
-	.card:hover {
-	 opacity: 1;
-	 transform:translateY(-4px)
-
-	}
-	
-	.index-box {
-	height: 60%;
-    background:transparent;
-    padding: 1em;
-    display: inline;
-    justify-content: space-around;
-
-	}
-	.card-content {
-		height: 70%;
-		border-top-right-radius:5px;
-		border-top-left-radius:5px;
-		background: white;
-	}
-
-	.card-base {
-		background: #00e7ffb0;
-		height: 30%;
-		display:flex;
-	}
-
-	.main-header > h1  {
-		color:black;
-		margin-top: 10%;
-		margin-bottom: 0px
-	}
-	.main-header > p {
-		margin-top: 1px;
-	}
-	.container {
-		margin-left: 10%;
-		margin-right: 10%;
-	}
-	.login {
-		padding: 1em 1.5em;
-    background: #77eaf6;
-    outline: none;
-    border: none;
-    cursor:pointer;
-	}
-	.login:active {
-		transform:translateY(-4px);
-	}
-	.card-bt {
-		margin:0 auto;
-		margin-top:1em;
-	}
-	.card-content > p {
-		font-weight: bold;
-	}
-	.fa {
-		padding: 2px;
-	    font-size: larger;
-	    padding-top: 1px;
-	}
-	
-</style>
 
 
+{% extends 'base.html' %}
 
-<div style="height:100vh;padding: 1em;background: #48d1cc61;">
-    <div class="container">
-		<div class='index-box'>
-			<div class="main-header">
-				<h1> Welcome to Quizbyte </h1>
-				<p> Prepare for the exam in your own way </p>
-				<div style="padding: 1em"><a class="login">Sign in</a></div>
+
+{% block content %}
+
+			<div class='index'>
+				<div class="grid" style="padding:2em;height: 40%">
+					<div class='head'>	<h1>Welcome to Quizbyte</h1> </div>
+				</div>
+
+			 {% if user.is_authenticated %}
+			 {% else %}
+				<div class='login-div'>
+					<p>Sign in</p>
+					<form class='form' method="POST" action="{% url "auth" %}">
+						{% csrf_token %}
+						<div class='form-div'>
+							<label class="form-label">Username</label>
+							<input type="text" name="username" class="form-input"/>
+							</label>
+						</div>
+						<div class='form-div'>
+							<label class="form-label">Password</label>
+							<input type="password" name="password" class="form-input"/>
+							</label>
+						</div>
+						<button type='submit' class="btn btn-primary float-right">Sign In</button>
+					</form>
+					<p style="color:red;">{{error}}</p>
+				</div>
 			</div>
-			<div></div>
-		</div>
-					{% if subjects %} <h2>Subjects</h2> {% else %}<h2>No Subjects here Sign in to access</h2>{% endif %}
+			{% endif %}
 
-		<div style="height: 30%;display: flex;flex-wrap: wrap;">
-			{% for subject in subjects %}
-			</section>
-			<section class='card'>
-				<div class='card-content'>
-					<p>{{subject.subject_name}}<p> {% for area in subject.subject_chapters.all %}{{ area }}<br/>{% endfor %}
+			{% if user.is_authenticated %}
+				<div class="container" style="padding:2em">
+					{% if subjects %} <h2>Subjects</h2> {% endif %}
+				<div class="row" style="padding: 1em;padding-left: 0px;">
+					{% for subject in subjects %}
+					  <div class="col-sm-6">
+					    <div class="card color">
+					      <div class="card-body">
+					        <h5 class="card-title">{{subject.subject_name}}</h5>
+					        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					        <a href="{% url "subject_detail" subject.pk %}"" class="btn btn-primary">Learn</a>
+					      </div>
+					    </div>
+					  </div>
+					{% endfor %}
+					</div>
+
 				</div>
-				<div class='card-base'>
-					<div class="card-bt"><a href="{% url "subject_detail" subject.pk %}">Explore</a><i class="fa fa-arrow-circle-right"></i></div>
+			{% else %}
+				<div class="container" style="padding:2em">
+					<p style="text-align:center;">No Subjects here Sign in to get access</p>
 				</div>
-			</section>
-			{% endfor %}
-			
-		</div>
-	</div>
-	
-</div>
+
+				{% endif %}
+
+{% endblock %}
+
