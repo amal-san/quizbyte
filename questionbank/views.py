@@ -6,6 +6,7 @@ from django.views.generic import ListView, View, DetailView
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
 
 
 
@@ -19,41 +20,42 @@ class QuestionListView(View):
 	def get(self, request, *args, **kwargs):
 		questions = Question.objects.all()
 		context = {'questions': questions}
-		return render(request, "test.html", context=context)
+		r
 
 
-class IndexView(TemplateView):
-	template_name = 'index.html'
+class IndexView(View):
 
-	def get_context_data(self, **kwargs):
+	def get(self,request, **kwargs):
 		subjects = Subject.objects.all()
-		return { 'subjects': subjects }
+		return render(request, "index.html",{ 'subjects': subjects})
 
-class SubjectDetailView(TemplateView):
+class SubjectDetailView(View):
 
-	template_name = 'chapter.html'
-
-	def get_context_data(self, **kwargs):
+	def get(self,request, **kwargs):
 		chapters = Subject.objects.all().filter(id=self.kwargs['pk']).select_related()
-		return { 'chapters': chapters }
+		print(request.META.get('HTTP_REFERER'))
+		context = { 'chapters': chapters , 'prevurl':request.META.get('HTTP_REFERER') }
+		return render(request,'chapter.html',context)
 
-class ChapterDetailView(TemplateView):
 
-	template_name = 'questions.html'
 
-	def get_context_data(self, **kwargs):
+class ChapterDetailView(View):
+
+
+	def get(self,request,**kwargs):
 		questions = Chapter.objects.all().filter(id=self.kwargs['pk']).select_related()
-		print(questions)
-		return { 'questions': questions ,'back':self.kwargs['pk'] }
+		print(request.META.get('HTTP_REFERER'))
+		context = { 'questions': questions ,'prevurl':request.META.get('HTTP_REFERER') }
+		return render(request,'questions.html', context)
 
-class QuestionDetailView(TemplateView):
+class QuestionDetailView(View):
 
-	template_name = 'question.html'
 
-	def get_context_data(self, **kwargs):
+	def get(self,request, **kwargs):
 		question = Question.objects.all().filter(id=self.kwargs['pk'])
-		print(question)
-		return { 'question': question,'back':self.kwargs['pk']  }
+		print(request.META.get('HTTP_REFERER'))
+		context = { 'question': question ,'prevurl':request.META.get('HTTP_REFERER') }
+		return render(request, 'question.html',context)
 
 
 class LoginView(View):
@@ -83,10 +85,5 @@ class LogoutView(View):
 		return redirect('/home')
 
 
-class GetUrl(View):
-
-	def get(self,request, **kwargs):
-		back_id = self.kwargs['pk']
-		print (back_id)
 
 		
