@@ -1,17 +1,24 @@
-{% for subject in questions %}
-
-{% for question in subject.chapter_questions.all %}
+{% extends 'base.html' %}
 
 
+{% block content %}
 
-	{{ question }} {{question.pk}}	<a href="{% url 'question_detail' question.pk %}">Explore</a>
+<div class="container" style="padding: 2em;">
+	{{ request.path }}
+	<a href="{{request.META.HTTP_REFERER|escape}}">Back</a>
 
+			<h1> Questions </h1><br>
+	<div style="display: flex;">
+	{% for subject in questions %}
+		{% for question in subject.chapter_questions.all %}
+		<div class="card">
+		  <div class="card-body">
+		    	<a href="{% url 'question_detail' question.pk %}" class="btn btn-primary btn-lg">{{ question }}</a>
+		  </div>
+		</div>
+		{% endfor %}
+	{% endfor %}			
+	</div>
+</div>
 
-
-
-
-
-
-{% endfor %}
-
-{% endfor %}
+{% endblock %}
