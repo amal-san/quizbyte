@@ -1,16 +1,47 @@
 
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<script>
+	function show() {
+
+		if (document.getElementById('ans').style.opacity  == 1) {
+
+			document.getElementById('ans').style.opacity  = 0;
+			document.getElementById('bt').innerHTML = 'Show Answer'
+
+
+
+		}
+		else {
+
+			document.getElementById('ans').style.opacity  = 1;
+			document.getElementById('bt').innerHTML = 'Hide Answer' 
+
+
+		}
+
+	}
+</script>
+<div class="container-fluid" style="padding: 2em;display: flex;flex-direction: column;">
+	<a href="{{request.META.HTTP_REFERER|escape}}">Back</a>
 
 {% for q in question %}
 
+	<div style="margin-bottom: 1em;">
+		<img src="{{ q.question_description }}"/>
 
-	{{ q.question_number }}
-	{{ q.question_description }}
-	{{ q.question_answer }}
-	{{ q.question_howtodo }}
-
-
-
-
+	</div>
+	<div><button id='bt' class="btn btn-success btn-lg " onclick="show()">Show Answer</button></div>
+	<div id='ans' style="margin-top: 1em;opacity: 0;">
+		<img src="{{ q.question_answer }}"/>
+	</div>
 
 {% endfor %}
+
+</div>
+{% endblock %}
+
 
