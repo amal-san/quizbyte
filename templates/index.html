@@ -14,8 +14,10 @@
 			 {% else %}
 				<div class='login-div'>
 					<p>Sign in</p>
+
 					<form class='form' method="POST" action="{% url "auth" %}">
 						{% csrf_token %}
+						<p style="color:red;">{{error}}</p>
 						<div class='form-div'>
 							<label class="form-label">Username</label>
 							<input type="text" name="username" class="form-input"/>
@@ -28,7 +30,7 @@
 						</div>
 						<button type='submit' class="btn btn-primary float-right">Sign In</button>
 					</form>
-					<p style="color:red;">{{error}}</p>
+					
 				</div>
 			</div>
 			{% endif %}
