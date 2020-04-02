@@ -25,22 +25,30 @@
 
 	}
 </script>
-<div class="container-fluid" style="padding: 2em;display: flex;flex-direction: column;">
-	<a href="{{request.META.HTTP_REFERER|escape}}">Back</a>
+	<div class="container-fluid" style="padding: 2em;">
+		<input style="border:none;color:white" action="action"
+	    onclick="window.history.go(-1); return false;"
+	    type="submit"
+	    value="back"
+	    class='btn-sm bg-info'
+	    />
+		<div style="display: flex;flex-direction: column;">
+		
 
-{% for q in question %}
+	{% for q in question %}
 
-	<div style="margin-bottom: 1em;">
-		<img src="{{ q.question_description }}"/>
+		<div style="margin-bottom: 1em;">
+			<img src="{{ q.question_description }}"/>
+
+		</div>
+		<div><button id='bt' class="btn btn-success btn-lg " onclick="show()">Show Answer</button></div>
+		<div id='ans' style="margin-top: 1em;opacity: 0;">
+			<img src="{{ q.question_answer }}"/>
+		</div>
+
+	{% endfor %}
 
 	</div>
-	<div><button id='bt' class="btn btn-success btn-lg " onclick="show()">Show Answer</button></div>
-	<div id='ans' style="margin-top: 1em;opacity: 0;">
-		<img src="{{ q.question_answer }}"/>
-	</div>
-
-{% endfor %}
-
 </div>
 {% endblock %}
 

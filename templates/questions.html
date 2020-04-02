@@ -4,19 +4,24 @@
 {% block content %}
 
 <div class="container" style="padding: 2em;">
-	<a href="{{request.META.HTTP_REFERER|escape}}">Back</a>
-
-			<h1> Questions </h1><br>
+	<input style="border:none;color:white;" 
+    action="action"
+    onclick="window.history.go(-1); return false;"
+    type="submit"
+    value="back"
+    class='btn-sm bg-info'
+    />
+    	<h1> Questions </h1><br>
 	<div style="display: flex;">
-	{% for subject in questions %}
-		{% for question in subject.chapter_questions.all %}
-		<div class="card">
-		  <div class="card-body">
-		    	<a href="{% url 'question_detail' question.pk %}" class="btn btn-primary btn-lg">{{ question }}</a>
-		  </div>
-		</div>
-		{% endfor %}
-	{% endfor %}			
+		{% for subject in questions %}
+			{% for question in subject.chapter_questions.all %}
+			<div class="card">
+			  <div class="card-body">
+			    	<a href="{% url 'question_detail' question.pk %}" class="btn btn-primary btn-lg">{{ question }}</a>
+			  </div>
+			</div>
+			{% endfor %}
+		{% endfor %}			
 	</div>
 </div>
 
