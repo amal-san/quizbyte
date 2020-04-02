@@ -1,0 +1,122 @@
+<head>
+<title>QuizByte</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+	body {
+		margin:0;
+		font-family: 'Playfair Display', serif;
+		overflow:none;
+
+		}
+	h2 {
+		margin-bottom:0px;
+	}
+	.main {
+		height: 100%;
+		background:white;
+
+	}
+	.b {
+		background: black;
+		color:white;
+	}
+	.navbar-brand {
+		color:white!important;
+		font-size: 1.5em;
+	}
+	.grid {
+		margin-top:1em;
+		border-radius: 15px;
+		display: flex;
+   		flex-direction: column;
+    	justify-content: center;
+    	padding-right: 0px;
+	}
+	.color {
+		background: #67636347;
+   		 box-shadow: 3px 3px 3px 1px #8c8585;
+   		 border: none;
+   		 margin:.5em;
+
+	}
+	.btn {
+		border-radius: 0px!important;
+	}
+	.head {
+		margin-bottom: 1em;
+	}
+	.index {
+		padding-top: 2em;
+		display:flex;
+		justify-content: space-around;
+	}
+	.login-div {
+	    padding: 1em;
+	    background: white;
+	    box-shadow:2px 2px 9px 3px #9a9898;
+
+	}
+	.form {
+		background-color:white;
+    	border-radius: 8px;
+
+
+	}
+	.form-div {
+		display: flex;
+	    border: 2px solid black;
+	    padding: 5px;
+	    border-radius: 7px;
+	    position: relative;
+	    margin:1em;
+	}
+	.form-label {
+	    color: black;
+	    position: absolute;
+	    top: -.9em;
+	    left: calc(.75rem - 2px);
+	    background-color: white;
+	    padding: 0 8px;
+
+	}
+	.form-input {
+	    border: 0;
+	    box-shadow: none;
+	    background-color:white;
+	    margin: 0;
+	    flex: 1 1;
+	    border-radius: 7px;
+	    outline: none;
+	    font-size: 1em;		
+
+	}
+	.navbar {
+		justify-content: space-between!important;
+	}
+	@media only screen and (max-width: 668px)
+		.index {
+		    flex-direction: column;
+		}
+</style>
+	<nav class=" d-flex navbar navbar-expand-lg navbar-light b">
+		    <a class="navbar-brand" href="{% url 'index' %}">Q</a>
+		    {% if user.is_authenticated %}
+
+		    <a class="navbar-brand" href="{% url "logout" %}">Logout</a>
+		    {% else %}
+		    <a class="navbar-brand" href="{% url "auth" %}">Login</a>
+		    {% endif %}
+		 </nav>
+    <div class="container main">	
+	{% block content %}
+
+
+
+	{% endblock %}
+	</div>
