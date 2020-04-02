@@ -4,7 +4,13 @@
 
 {% block content %}
 	<div class="container" style="padding:2em">
-			<a href="{% url 'index' %}">Back</a>
+			<input style="border:none;color:white" 
+		    action="action"
+		    onclick="window.history.go(-1); return false;"
+		    type="submit"
+		    value="back"
+		    class='btn-sm bg-info'
+		    />
 					 <h2>Chapters</h2> 
 			<div class="row" style="padding: 1em;padding-left: 0px;">
 				{% for subject in chapters %}
