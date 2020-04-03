@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 
+{% block title %} Questions {% endblock %}
+
+
 {% block content %}
 
 <div class="container" style="padding: 2em;">
@@ -12,12 +15,15 @@
     class='btn-sm bg-info'
     />
     	<h1> Questions </h1><br>
-	<div style="display: flex;">
+    	<span class="badge badge-success">EASY</span>
+		<span class="badge badge-warning">MEDIUM</span>
+		<span class="badge badge-danger">HARD</span>
+	<div style="display: flex;"class='row'>
 		{% for subject in questions %}
 			{% for question in subject.chapter_questions.all %}
-			<div class="card">
+			<div class="card" style="padding:2px;">
 			  <div class="card-body">
-			    	<a href="{% url 'question_detail' question.pk %}" class="btn btn-primary btn-lg">{{ question }}</a>
+			    	<a href="{% url 'question_detail' question.pk %}" class="btn {{question.question_attr }} btn-lg">{{ question }}</a>
 			  </div>
 			</div>
 			{% endfor %}
