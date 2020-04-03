@@ -4,11 +4,20 @@ from ckeditor.fields import RichTextField
 
 
 
+EASY = 'btn-success'
+MEDIUM = 'btn-warning'
+HARD = 'btn-danger'
+
+
+CHOICES = [ (EASY,'EASY'), (MEDIUM,'MEDIUM'),(HARD,'HARD')]
+
+
+
 class Question(models.Model):
 	question_number = models.FloatField(_("Question's Number"),unique=True)
 	question_description = models.TextField(_("Question's Description"),max_length=10000)
 	question_answer = models.TextField(_("Question's answer"),max_length=10000)
-	question_howtodo = models.TextField(_("Question's how to do"),max_length=10000)
+	question_attr = models.CharField(_("Toughness"),max_length=12,choices=CHOICES,default=EASY)
 
 
 	def __str__(self):
