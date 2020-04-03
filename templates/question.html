@@ -1,6 +1,8 @@
 
 {% extends 'base.html' %}
 
+			{% block title %}Q{% endblock %}
+
 
 {% block content %}
 
@@ -41,6 +43,7 @@
 			<img src="{{ q.question_description }}"/>
 
 		</div>
+		<div><a class='btn-md {{q.question_attr}}'>{% if 'btn-success' in q.question_attr %}EASY{% endif %} {% if 'btn-warning' in q.question_attr %}MEDIUM{% endif %}</a></div><br>
 		<div><button id='bt' class="btn btn-success btn-lg " onclick="show()">Show Answer</button></div>
 		<div id='ans' style="margin-top: 1em;opacity: 0;">
 			<img src="{{ q.question_answer }}"/>
