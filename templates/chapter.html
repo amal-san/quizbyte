@@ -1,6 +1,8 @@
 
 {% extends 'base.html' %}
 
+{% block title %} Chapters {% endblock %}
+
 
 {% block content %}
 	<div class="container" style="padding:2em">
@@ -24,7 +26,7 @@
 					        <a href="{% url "chapter_detail" chapter.pk %}" class="btn btn-primary">Learn</a>
 					      </div>
 					    </div>
-					  </div>
+					  </div>	
 					{% endfor %}
 
 				{% endfor %}			
