@@ -62,7 +62,7 @@ class LoginView(View):
 
 
 	def get(self,request):
-		return redirect('/home')
+		return redirect('/')
 
 	def post(self,request):
 		if request.method == 'POST':
@@ -75,7 +75,7 @@ class LoginView(View):
 			else:
 				error = 'Invalid username or password'
 				return render(request, 'index.html' , {'error': error})
-				return redirect('/home')
+				return redirect('/')
 
 
 class LogoutView(View):
