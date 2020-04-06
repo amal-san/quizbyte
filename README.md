@@ -1,7 +1,9 @@
 # Quizbyte :pen:
 Online questionbank for prefered subjects
 
-  - Add new subjects, chapters and question
+  - Append new subjects, chapters and question
   - Question with answers
-  - Three dificutly options
+  - 3 difficulty options
+  - Auth facility
+  - Questions and answer can be given as url and normal text
 
