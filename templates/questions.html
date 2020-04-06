@@ -18,7 +18,7 @@
     	<span class="badge badge-success">EASY</span>
 		<span class="badge badge-warning">MEDIUM</span>
 		<span class="badge badge-danger">HARD</span>
-	<div style="display: flex;"class='row'>
+	<div style="display: flex;margin-top: 5px"class='row'>
 		{% for subject in questions %}
 			{% for question in subject.chapter_questions.all %}
 			<div class="card" style="padding:2px;">
