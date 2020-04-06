@@ -1,7 +1,11 @@
 
 {% extends 'base.html' %}
 
+			
+
 			{% block title %}Q{% endblock %}
+
+
 
 
 {% block content %}
@@ -40,13 +44,26 @@
 	{% for q in question %}
 
 		<div style="margin:1em;">
-			<img src="{{ q.question_description }}"/>
+			{% if "http" in q.question_description %}
+				<img src="{{q.question_description}} "/>
+			{% else %}
+				<p>{{q.question_description}}</p>
+
+			{% endif %}
+
+
 
 		</div>
-		<div><a class='btn-md {{q.question_attr}}'>{% if 'btn-success' in q.question_attr %}EASY{% endif %} {% if 'btn-warning' in q.question_attr %}MEDIUM{% endif %}</a></div><br>
-		<div><button id='bt' class="btn btn-success btn-lg " onclick="show()">Show Answer</button></div>
+		<div><a class='btn-md {{q.question_attr}}' style="padding: .3em">{% if 'btn-success' in q.question_attr %}EASY{% endif %} {% if 'btn-warning' in q.question_attr %}MEDIUM{% endif %}</a></div><br>
+		<div><button id='bt' class="btn btn-outline-success btn-lg " onclick="show()">Show Answer</button></div>
 		<div id='ans' style="margin-top: 1em;opacity: 0;">
-			<img src="{{ q.question_answer }}"/>
+			{% if "http" in q.question_answer %}
+				<img src="{{q.question_answer }} "/>
+			{% else %}
+				<p>{{q.question_answer }}</p>
+
+			{% endif %}
+
 		</div>
 
 	{% endfor %}
@@ -54,5 +71,6 @@
 	</div>
 </div>
 {% endblock %}
+
 
 
